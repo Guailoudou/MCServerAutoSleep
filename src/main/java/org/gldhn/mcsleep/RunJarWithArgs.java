@@ -79,7 +79,8 @@ public class RunJarWithArgs {
 
             // 定期向子进程发送输入
             Runnable task = () -> sendInputToProcess(process.getOutputStream());
-            scheduler.scheduleAtFixedRate(task, 0, getWaitingTime()*60, TimeUnit.SECONDS);
+            if(config.getNoOneClose())
+                scheduler.scheduleAtFixedRate(task, 0, getWaitingTime()*60, TimeUnit.SECONDS);
 
             // 等待进程完成
             int exitCode = process.waitFor();
@@ -87,7 +88,8 @@ public class RunJarWithArgs {
             runJar = false;
             PrInput = null;
             // 关闭调度器
-            scheduler.shutdown();
+            if(config.getNoOneClose())
+                scheduler.shutdown();
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -99,7 +101,8 @@ public class RunJarWithArgs {
             scheduler.shutdown();
             scheduler = Executors.newScheduledThreadPool(1);
             Runnable task = () -> sendInputToProcess(process.getOutputStream());
-            scheduler.scheduleAtFixedRate(task, 0, getWaitingTime()*60, TimeUnit.SECONDS);
+            if(config.getNoOneClose())
+                scheduler.scheduleAtFixedRate(task, 0, getWaitingTime()*60, TimeUnit.SECONDS);
         }
     }
     public static void stop() {

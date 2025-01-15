@@ -5,6 +5,7 @@ import org.gldhn.mcsleep.RunJarWithArgs;
 import org.gldhn.mcsleep.config;
 import org.gldhn.mcstart.DisguiseServer;
 
+import javax.xml.stream.events.Comment;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class Main {
         new config();
         new McServerConfig();
         while (true){
-            if(!RunJarWithArgs.start()){
+            if(!RunJarWithArgs.start() || !config.getSleep()){
                 exit(1);
             }
             //删除已经存在的对象RunJarWithArgs
@@ -57,6 +58,7 @@ public class Main {
                 getConfig();
                 setCount(-1);
                 Rescheduler();
+                common.Logger("配置文件重载成功",3);
                 continue;
             }
             if ("sassleep".equalsIgnoreCase(line)) {
@@ -99,7 +101,9 @@ public class Main {
         System.out.println("        WaitingTime -> 单位分钟，每隔该时间后进行一次人数检测");
         System.out.println("       MaxZero -> 单位次，检测到多少次服务器人数为0后关闭服务器");
         System.out.println("   RunCommand -> 服务器运行指令，\\符号需要使用\\\\，如：C\\:\\\\Program");
-        System.out.println("         Loglevel -> 日志等级，能正常运行的话设置2比较好");
+        System.out.println("                NoOneClose -> 是否启用无人自动关闭");
+        System.out.println("          Sleep -> 是否启用自动关闭后休眠（必须启用NoOneClose）");
+        System.out.println("              Loglevel -> 日志等级，能正常运行的话设置2比较好");
         System.out.println("      第一次运行会生成配置文件config.properties，请修改配置文件后再运行");
         System.out.println("                    输入sashelp查看可用命令");
         System.out.println("        作者：乖漏斗 目前属于刚刚完成基本功能，遇到问题请及时反馈");

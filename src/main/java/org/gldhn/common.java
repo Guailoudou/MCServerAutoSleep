@@ -12,6 +12,7 @@ public class common {
             case 1 -> System.out.println("[WARN] " + text);
             case 2 -> System.out.println("[ERROR] " + text);
             case 3 -> System.out.println("[IMP-INFO] " + text);
+            case 4 -> System.out.println(text);
             default -> System.out.println("[INFO] " + text);
         }
     }

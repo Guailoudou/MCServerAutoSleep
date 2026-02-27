@@ -120,7 +120,8 @@ public class RunJarWithArgs {
         String line;
         try {
             while ((line = reader.readLine()) != null && runJar) {
-                common.Logger(streamType + ": " + line,3);
+//                common.Logger(streamType + ": " + line,3);
+                common.Logger(line,4);
             }
         } catch (IOException e) {
             e.printStackTrace();

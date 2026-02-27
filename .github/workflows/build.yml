@@ -19,8 +19,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - name: make gradle wrapper executable
-        run: chmod +x ./gradlew
+      - name: make pom.xml wrapper executable
+        run: chmod +x ./pom.xml
       - name: build
         run: mvn -B package --file pom.xml
       - name: capture build artifacts

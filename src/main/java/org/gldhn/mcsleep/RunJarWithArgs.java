@@ -116,12 +116,12 @@ public class RunJarWithArgs {
         common.Logger("停止子进程",0);
     }
     private static void readStream(InputStream inputStream, String streamType) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        String line;
+        byte[] buffer = new byte[10240];
+        int bytesRead;
         try {
-            while ((line = reader.readLine()) != null && runJar) {
-//                common.Logger(streamType + ": " + line,3);
-                common.Logger(line,4);
+            while ((bytesRead = inputStream.read(buffer)) != -1 && runJar) {
+                System.out.write(buffer, 0, bytesRead);
+                System.out.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();

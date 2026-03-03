@@ -27,7 +27,7 @@ public class RunJarWithArgs {
 
     RunJarWithArgs() {
     }
-    static boolean runJar = false;
+    public static boolean runJar = false;
     public static OutputStream PrInput=null;
     public static boolean restart = false;
     private static Process process;
@@ -64,6 +64,7 @@ public class RunJarWithArgs {
             // 定时任务线程池
             scheduler = Executors.newScheduledThreadPool(1);
 
+            // 注册关闭钩子
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (process.isAlive()) {
                     process.destroy();

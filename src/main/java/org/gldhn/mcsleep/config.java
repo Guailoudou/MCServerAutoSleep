@@ -1,14 +1,15 @@
 package org.gldhn.mcsleep;
 import org.gldhn.common;
 
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.Properties;
 public class config {
+    private static Properties properties;
     public config(){
+        properties = new Properties();
         getConfig();
     }
     public static void getConfig(){
-        Properties properties = new Properties();
         //判断配置文件是否存在，不存在自动创建
         if(!new java.io.File("config.properties").exists()){
             try {
@@ -20,7 +21,9 @@ public class config {
                 properties.setProperty("NoOneClose","true");
                 properties.setProperty("Sleep","true");
                 properties.setProperty("LogLevel","2");
-                properties.store(new java.io.FileOutputStream("config.properties"),null);
+                properties.setProperty("MOTD","§a服务器正在休眠中...§r\n§e点击进入以启动服务器§r");
+                properties.setProperty("StartMessage","§a服务器正在启动中，请稍候...§r");
+                properties.store(new java.io.FileOutputStream("config.properties"),"MCSAS config");
                 common.Logger("配置文件创建成功",1);
                 System.exit(0);
             } catch (Exception e) {
@@ -36,6 +39,8 @@ public class config {
             LogLevel = Integer.parseInt(properties.getProperty("LogLevel"));
             NoOneClose = Boolean.parseBoolean(properties.getProperty("NoOneClose"));
             Sleep = Boolean.parseBoolean(properties.getProperty("Sleep"));
+            MOTD = properties.getProperty("MOTD", "§a服务器正在休眠中...§r\n§e点击进入以启动服务器§r");
+            StartMessage = properties.getProperty("StartMessage", "§a服务器正在启动中，请稍候...§r");
             common.Logger("配置文件读取成功",3);
             common.Logger("RunCommand: " + RunCommand,3);
             common.Logger("WaitingTime: " + WaitingTime,3);
@@ -43,9 +48,24 @@ public class config {
             common.Logger("NoOneClose: " + NoOneClose,3);
             common.Logger("Sleep: " + Sleep,3);
             common.Logger("LogLevel: " + LogLevel,3);
+            common.Logger("MOTD: " + MOTD,3);
+            common.Logger("StartMessage: " + StartMessage,3);
+            saveConfig();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private static void saveConfig() throws IOException {
+        properties.setProperty("RunCommand",RunCommand);
+        properties.setProperty("WaitingTime", String.valueOf(WaitingTime));
+        properties.setProperty("MaxZero", String.valueOf(MaxZero));
+        properties.setProperty("NoOneClose", String.valueOf(NoOneClose));
+        properties.setProperty("Sleep", String.valueOf(Sleep));
+        properties.setProperty("LogLevel", String.valueOf(LogLevel));
+        properties.setProperty("MOTD",MOTD);
+        properties.setProperty("StartMessage",StartMessage);
+        properties.store(new java.io.FileOutputStream("config.properties"),null);
+        common.Logger("配置文件保存成功",1);
     }
     //运行命令
     private static String RunCommand;
@@ -61,6 +81,10 @@ public class config {
     private static Integer Count = 0;
     //日志等级
     public static Integer LogLevel = 0;
+    //服务器MOTD信息
+    private static String MOTD;
+    //服务器启动提示信息
+    private static String StartMessage;
 
     public static Integer getLogLevel() {
         return LogLevel;
@@ -116,5 +140,21 @@ public class config {
 
     public static void setSleep(Boolean sleep) {
         Sleep = sleep;
+    }
+
+    public static String getMOTD() {
+        return MOTD;
+    }
+
+    public static void setMOTD(String MOTD) {
+        config.MOTD = MOTD;
+    }
+
+    public static String getStartMessage() {
+        return StartMessage;
+    }
+
+    public static void setStartMessage(String startMessage) {
+        StartMessage = startMessage;
     }
 }

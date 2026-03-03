@@ -82,7 +82,7 @@ public class Main {
                 continue;
             }
 //            this.getOutputStream().flush();
-            if(PrInput != null){
+            if(PrInput != null && RunJarWithArgs.runJar){
                 try {
                     PrInput.write((line+System.lineSeparator()).getBytes());
                     PrInput.flush();
@@ -103,7 +103,10 @@ public class Main {
         System.out.println("   RunCommand -> 服务器运行指令，\\符号需要使用\\\\，如：C\\:\\\\Program");
         System.out.println("                NoOneClose -> 是否启用无人自动关闭");
         System.out.println("          Sleep -> 是否启用自动关闭后休眠（必须启用NoOneClose）");
+        System.out.println("              MOTD -> 休眠状态下显示的motd");
+        System.out.println("              StartMessage -> 玩家尝试加入后给出的提示");
         System.out.println("              Loglevel -> 日志等级，能正常运行的话设置2比较好");
+        System.out.println(" ");
         System.out.println("      第一次运行会生成配置文件config.properties，请修改配置文件后再运行");
         System.out.println("                    输入sashelp查看可用命令");
         System.out.println("        作者：乖漏斗 目前属于刚刚完成基本功能，遇到问题请及时反馈");

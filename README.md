@@ -8,15 +8,22 @@ java -jar MCSAS-1.2-SNAPSHOT.jar
 ```
 启动后，会在服务器根目录生成一个config.properties文件，修改里面的参数，再启动服务器即可。
 
+> [!WARNING]
+>
+> 直接终止本程序进程会导致服务器无法正常终止, 要关闭请输入stop 命令
+> 中文需要使用unicode编码
+>
 ## 参数说明
-| 参数          | 类型      | 默认值                    | 说明                                     |
-|-------------|---------|------------------------|----------------------------------------|
-| WaitingTime | Int     | 60                     | 单位分钟，每隔该时间后进行一次人数检测                    |
-| MaxZero     | Int     | 3                      | 单位次，检测到多少次服务器人数为0后关闭服务器                |
-| RunCommand  | String  | `java -jar server.jar` | 服务器运行指令，`\ `符号需要使用`\\`，如：`C:\\Program` |
-| NoOneClose  | Boolean | true                   | 是否启用无人自动关闭                             |
-| Sleep       | Boolean | true                   | 是否启用自动关闭后休眠（必须启用NoOneClose）            |
-| Loglevel    | Int     | 2                      | 日志等级，能正常运行的话设置2比较好                     |
+| 参数            | 类型      | 默认值                               | 说明                                     |
+|---------------|---------|-----------------------------------|----------------------------------------|
+| WaitingTime   | Int     | 60                                | 单位分钟，每隔该时间后进行一次人数检测                    |
+| MaxZero       | Int     | 3                                 | 单位次，检测到多少次服务器人数为0后关闭服务器                |
+| RunCommand    | String  | `java -jar server.jar`            | 服务器运行指令，`\ `符号需要使用`\\`，如：`C:\\Program` |
+| NoOneClose    | Boolean | true                              | 是否启用无人自动关闭                             |
+| Sleep         | Boolean | true                              | 是否启用自动关闭后休眠（必须启用NoOneClose）            |
+| MOTD          | String  | `§a服务器正在休眠中...§r\n§e点击进入以启动服务器§r` | 休眠状态下显示的motd (中文需要使用unicode编码)         |
+| StartMessage  | String  | `§a服务器正在启动中，请稍候...§r`             | 玩家尝试加入后给出的提示 (中文需要使用unicode编码)         |
+| Loglevel      | Int     | 2                                 | 日志等级，能正常运行的话设置2比较好                     |
 
 第一次运行会生成配置文件config.properties，请修改配置文件后再运行。
 
